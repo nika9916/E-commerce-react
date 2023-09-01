@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { AxiosResponse } from "axios";
 import { styled } from "styled-components";
+import { Link } from "react-router-dom";
 import { Loader } from "../../global";
 
 export function Products() {
   const [products, setProducts] = useState([]);
   const [backUp, setBackUp] = useState([]);
-  const [limit, setLimit] = useState(1);
+  const [limit, setLimit] = useState(4);
   const action = () => {
     if (products.length > 0) {
       let newProducts = [...products];
@@ -38,7 +39,8 @@ export function Products() {
       <div>
         <button onClick={action}>Action</button>
         <button onClick={reset}>reset</button>
-        <button onClick={loadMore}>{limit}</button>
+        <button onClick={loadMore}>Load more</button>
+        <span>Loaded : {limit} products</span>
       </div>
       {products.map((product: Product) => (
         <ProductCards key={product.id}>
@@ -46,6 +48,7 @@ export function Products() {
           <Header>{product.title}</Header>
           <Description>{product.description}</Description>
           <Price>{product.price}</Price>
+          <Link to={`/products/${product.id}`}>Details</Link>
         </ProductCards>
       ))}
     </div>
@@ -53,11 +56,14 @@ export function Products() {
 }
 
 const ProductCards = styled.div`
+  display: grid;
   display: flex;
   flex-direction: column;
   border: 1px solid black;
   padding: 1rem;
   border-radius: 1%;
+  flex-wrap: wrap;
+  width: 30%;
 `;
 
 const Img = styled.img`

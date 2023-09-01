@@ -15,3 +15,10 @@ export function _put(path, data) {
 export function _delete(path) {
   return axios.delete(path);
 }
+
+export const api = {
+  _get,
+  _post,
+  _put,
+  _delete,
+};

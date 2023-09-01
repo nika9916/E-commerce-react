@@ -48,7 +48,7 @@ const NavLink = styled(Link)`
     opacity: 1;
   }
   &.active {
-    color: #030060;
+    color: red;
     text-decoration: underline;
     opacity: 1;
   }
